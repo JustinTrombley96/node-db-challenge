@@ -1,19 +1,18 @@
 const express = require('express');
 
-const projects = require('./projects-model');
+const resources = require('./resources-model');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
-	projects
-		.getProjects()
-		.then(projects => {
-			res.status(200).json(projects);
+	resources
+		.getResources()
+		.then(resources => {
+			res.status(200).json(resources);
 		})
 		.catch(err => {
 			res.status(500).json({ message: 'error' });
 		});
 });
-
 
 module.exports = router;
