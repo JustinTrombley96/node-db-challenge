@@ -14,5 +14,17 @@ router.get('/', (req, res) => {
 			res.status(500).json({ message: 'error' });
 		});
 });
+router.post('/', (req, res) => {
+	const resource = req.body;
+	resources
+		.addResource(resource)
+		.then(resource => {
+			console.log(resource);
+			res.status(200).json(resource);
+		})
+		.catch(err => {
+			res.status(500).json({ message: 'error' });
+		});
+});
 
 module.exports = router;
