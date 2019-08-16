@@ -27,7 +27,6 @@ router.post('/', (req, res) => {
 	tasks
 		.addTask(task)
 		.then(task => {
-			console.log(task);
 			res.status(200).json(task);
 		})
 		.catch(err => {
