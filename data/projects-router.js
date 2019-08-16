@@ -8,6 +8,13 @@ router.get('/', (req, res) => {
 	projects
 		.getProjects()
 		.then(projects => {
+			projects.map(project => {
+				if (project.completed === 0) {
+					project.completed = false;
+				} else {
+					project.completed = true;
+				}
+			});
 			res.status(200).json(projects);
 		})
 		.catch(err => {
@@ -17,15 +24,13 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 	const project = req.body;
 	projects
-        .addProject(project)
+		.addProject(project)
 		.then(project => {
-			console.log(project);
 			res.status(200).json(project);
 		})
 		.catch(err => {
 			res.status(500).json({ message: 'error' });
 		});
 });
-
 
 module.exports = router;
