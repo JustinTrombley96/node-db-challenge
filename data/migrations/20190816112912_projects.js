@@ -11,14 +11,21 @@ exports.up = function(knex) {
 			tbl.string('description', 5000).notNullable();
 			tbl.string('notes', 2000);
 			tbl.boolean('completed').notNullable().defaultTo(false);
-			tbl.references('id').inTable('projects').onDelete('RESTRICT').onUpdate('CASCADE');
+			tbl
+				.integer('project_id')
+				.unsigned()
+				.notNullable()
+				.references('id')
+				.inTable('projects')
+				.onDelete('CASCADE')
+				.onUpdate('CASCADE');
 		})
 		.createTable('resources', tbl => {
 			tbl.increments();
 			tbl.string('resource_name', 255).notNullable();
 			tbl.string('description', 5000);
 		})
-		.createTable('project_resouces', tbl => {
+		.createTable('project_resources', tbl => {
 			tbl.increments();
 
 			tbl
